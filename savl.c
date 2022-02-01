@@ -371,6 +371,26 @@ static int_fast8_t savl_search(struct savl_node *node, const savl_cmpfn cmpfn,
 }
 
 /**
+ * Find a node in a tree.
+ *
+ * @param tree		The root of the tree to be searched.
+ * @param cmpfn		Comparison function.
+ * @param key		The key.
+ *
+ * @return	The node the corresponds to the key (if any), or <b>`NULL`</b>.
+ */
+struct savl_node *savl_get(struct savl_node *const tree, const savl_cmpfn cmpfn,
+			   const union savl_key key)
+{
+	struct savl_node *node;
+
+	if (savl_search(tree, cmpfn, key, &node) == SAVL_EVEN)
+		return NULL;
+
+	return node;
+}
+
+/**
  * Replace a node in a tree.
  *
  * The key of the new node must compare equal to the key of the old node.

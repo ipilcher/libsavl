@@ -163,6 +163,9 @@ struct savl_node *savl_remove(struct savl_node **const tree,
 void savl_remove_node(struct savl_node *const node,
 		      struct savl_node **const tree);
 
+struct savl_node *savl_get(struct savl_node *const tree, const savl_cmpfn cmpfn,
+			   const union savl_key key);
+
 void savl_free(struct savl_node **const tree, const savl_freefn freefn);
 struct savl_node *savl_next(struct savl_node *node);
 struct savl_node *savl_first(struct savl_node *node);
