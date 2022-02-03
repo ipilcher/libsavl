@@ -385,9 +385,9 @@ struct savl_node *savl_get(struct savl_node *const tree, const savl_cmpfn cmpfn,
 	struct savl_node *node;
 
 	if (savl_search(tree, cmpfn, key, &node) == SAVL_EVEN)
-		return NULL;
+		return node;
 
-	return node;
+	return NULL;
 }
 
 /**
