@@ -1036,6 +1036,9 @@ void savl_free(struct savl_node **const tree, const savl_freefn freefn)
 {
 	struct savl_node *node, *next;
 
+	if (*tree == NULL)
+		return;
+
 	node = savl_first(*tree);
 
 	while (node != NULL) {
