@@ -9,7 +9,7 @@
 Name:		lib%{dev_name}
 Summary:	Simple AVL tree library
 Version:	%{so_ver}
-Release:	1%{?dist}
+Release:	2%{?dist}
 License:	GPLv2+
 Source0:	https://github.com/ipilcher/%{name}/archive/refs/tags/%{version}.tar.gz
 BuildRequires:	git-core gcc
@@ -28,8 +28,8 @@ The files required to build programs that use libsavl.
 %build
 cd %{git_dir}
 git checkout v%{git_ver}
-gcc -g -O0 -Wall -Wextra -shared -fPIC -Wl,-soname,%{name}.so.%{so_ver} \
-	-o %{name}.so.%{so_ver} savl.c
+gcc -std=gnu99 -g -O0 -Wall -Wextra -shared -fPIC \
+	-Wl,-soname,%{name}.so.%{so_ver} -o %{name}.so.%{so_ver} savl.c
 git checkout main
 
 %install
@@ -52,6 +52,9 @@ ln -s %{name}.so.%{so_ver} %{buildroot}%{_libdir}/%{name}.so
 %attr(0644,root,root) %{_includedir}/%{dev_name}.h
 
 %changelog
+* Thu Feb 10 2022 Ian Pilcher <arequipeno@gmail.com> - ?.?-2
+- Build with -std=gnu99 to make restrict keyword work on EL7
+
 * Thu Feb  3 2022 Ian Pilcher <arequipeno@gmail.com> - ?.?-1
 - Auto-detect latest git tag
 - Move git checkout to %build section
