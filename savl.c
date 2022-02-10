@@ -959,6 +959,9 @@ struct savl_node *savl_remove(struct savl_node **const tree,
  */
 struct savl_node *savl_first(struct savl_node *node)
 {
+	if (node == NULL)
+		return;
+
 	while (node->left != NULL)
 		node = node->left;
 
@@ -974,6 +977,9 @@ struct savl_node *savl_first(struct savl_node *node)
  */
 struct savl_node *savl_last(struct savl_node *node)
 {
+	if (node == NULL)
+		return;
+
 	while (node->right != NULL)
 		node = node->right;
 
