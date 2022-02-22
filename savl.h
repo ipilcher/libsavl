@@ -5,7 +5,7 @@
  *
  * Simple AVL tree
  *
- * Copyright 2021 Ian Pilcher <arequipeno@gmail.com>
+ * Copyright 2021-2022 Ian Pilcher <arequipeno@gmail.com>
  */
 
 #ifndef SAVL_H_INCLUDED
@@ -13,14 +13,6 @@
 
 #include <inttypes.h>
 #include <stddef.h>
-
-#if 0
-#define SAVL_DBL_LEFT	((int_fast8_t)	-2)
-#define SAVL_LEFT	((int_fast8_t)	-1)
-#define SAVL_EVEN	((int_fast8_t)	 0)
-#define SAVL_RIGHT	((int_fast8_t)	 1)
-#define SAVL_DBL_RIGHT	((int_fast8_t)	 2)
-#endif
 
 /**
  * AVL tree node structure.
