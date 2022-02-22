@@ -7,7 +7,7 @@
 Name:		libsavl
 Summary:	Simple AVL tree library - development version
 Version:	%git_ver
-Release:	3%{?dist}
+Release:	3.dev%{?dist}
 License:	GPLv2+
 Source0:	https://github.com/ipilcher/%{name}/archive/refs/tags/%{version}.tar.gz
 BuildRequires:	git-core gcc sed coreutils
@@ -51,6 +51,9 @@ ln -s %{name}.so.%{version} %{buildroot}%{_libdir}/%{name}.so
 %attr(0644,root,root) %{_includedir}/savl.h
 
 %changelog
+* Tue Feb 22 2022 Ian Pilcher <arequipeno@gmail.com> - ?.?.?-3.dev
+- Add .dev tag to RPM release
+
 * Tue Feb 22 2022 Ian Pilcher <arequipeno@gmail.com> - ?.?.?-3
 - Accomodate 3-digit versions, with 2-digit sonames
 
