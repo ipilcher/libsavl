@@ -1,10 +1,10 @@
 %define so_ver	0.7
-%define subver	0
+%define subver	1
 
 Name:		libsavl
 Summary:	Simple AVL tree library for C programs
 Version:	%{so_ver}.%{subver}
-Release:	3%{?dist}
+Release:	1%{?dist}
 License:	GPLv2+
 Source0:	https://github.com/ipilcher/libsavl/archive/v%{version}/%{name}-%{version}.tar.gz
 BuildRequires:	gcc doxygen
@@ -62,6 +62,9 @@ doxygen Doxyfile
 %doc %{_docdir}/%{name}/html
 
 %changelog
+* Tue Feb 22 2022 Ian Pilcher <arequipeno@gmail.com> - 0.7.1-1
+- Prepare for subversion bump
+
 * Tue Feb 22 2022 Ian Pilcher <arequipeno@gmail.com> - 0.7.0-3
 - Add LICENSE and README.md to main package
 
