@@ -2,24 +2,22 @@
 
 %define git_ver		%(git describe --tags --abbrev=0 | tr -d v)
 %define git_dir		%(pwd)
+%define so_ver		%(echo %git_ver | sed 's/\.[[:digit:]]*$//')
 
-%define so_ver		%{git_ver}
-%define dev_name	savl
-
-Name:		lib%{dev_name}
-Summary:	Simple AVL tree library
-Version:	%{so_ver}
-Release:	2%{?dist}
+Name:		libsavl
+Summary:	Simple AVL tree library - development version
+Version:	%git_ver
+Release:	3%{?dist}
 License:	GPLv2+
 Source0:	https://github.com/ipilcher/%{name}/archive/refs/tags/%{version}.tar.gz
-BuildRequires:	git-core gcc
+BuildRequires:	git-core gcc sed coreutils
 
 %description
-A simple low-level AVL tree library for C programs.
+A simple low-level AVL tree library for C programs.  This is a
+non-optimized, development version of the library.
 
 %package devel
 Summary:	Development files for libsavl
-
 %description devel
 The files required to build programs that use libsavl.
 
@@ -28,30 +26,34 @@ The files required to build programs that use libsavl.
 %build
 cd %{git_dir}
 git checkout v%{git_ver}
-gcc -std=gnu99 -g -O0 -Wall -Wextra -shared -fPIC \
-	-Wl,-soname,%{name}.so.%{so_ver} -o %{name}.so.%{so_ver} savl.c
+gcc -std=gnu99 -g -O0 -Wall -Wextra -shared -Wcast-align -fPIC \
+	-Wl,-soname,%{name}.so.%{so_ver} -o %{name}.so.%{version} savl.c
 git checkout main
 
 %install
 cd %{git_dir}
 rm -rf %{buildroot}
+# library
 mkdir -p mkdir -p %{buildroot}%{_libdir}
-cp %{name}.so.%{so_ver} %{buildroot}%{_libdir}/
+cp %{name}.so.%{version} %{buildroot}%{_libdir}/
+ln -s %{name}.so.%{version} %{buildroot}%{_libdir}/%{name}.so.%{so_ver}
+# devel
 mkdir -p %{buildroot}%{_includedir}
-cp %{dev_name}.h %{buildroot}%{_includedir}/
-ln -s %{name}.so.%{so_ver} %{buildroot}%{_libdir}/%{name}.so
-
-%post -p /sbin/ldconfig
-%postun -p /sbin/ldconfig
+cp savl.h %{buildroot}%{_includedir}/
+ln -s %{name}.so.%{version} %{buildroot}%{_libdir}/%{name}.so
 
 %files
-%attr(0755,root,root) %{_libdir}/%{name}.so.%{so_ver}
+%attr(0755,root,root) %{_libdir}/%{name}.so.%{version}
+%{_libdir}/%{name}.so.%{so_ver}
 
 %files devel
 %{_libdir}/%{name}.so
-%attr(0644,root,root) %{_includedir}/%{dev_name}.h
+%attr(0644,root,root) %{_includedir}/savl.h
 
 %changelog
+* Tue Feb 22 2022 Ian Pilcher <arequipeno@gmail.com> - ?.?.?-3
+- Accomodate 3-digit versions, with 2-digit sonames
+
 * Thu Feb 10 2022 Ian Pilcher <arequipeno@gmail.com> - ?.?-2
 - Build with -std=gnu99 to make restrict keyword work on EL7
 
