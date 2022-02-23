@@ -144,3 +144,16 @@ library link.
 $ sudo cp savl.h /usr/include/
 $ sudo ln -s cp libsavl.so.${VERSION} ${LIB_DIR}/libsavl.so
 ```
+
+## Using the library
+
+libSAVL's API is deliberately minimal.  Applications using the library are
+left to implement any additional abstractions themselves.
+
+The most notable feature of the API is that there is no separate data structure
+for tree nodes.  Instead, one or more `savl_node` structures is included
+directly in the data structure that is stored in a tree (or multiple trees).
+Given a pointer to a node in a particular tree, the `SAVL_NODE_CONTAINER()`
+macro can be used to access a pointer to the containing data structure.
+
+See [`examples/ex1.c`](examples/ex1.c) for an example.
