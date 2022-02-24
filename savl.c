@@ -3,7 +3,7 @@
 /*
  * Simple AVL tree
  *
- * Copyright 2021 Ian Pilcher <arequipeno@gmail.com>
+ * Copyright 2021-2022 Ian Pilcher <arequipeno@gmail.com>
  */
 
 #include "savl.h"

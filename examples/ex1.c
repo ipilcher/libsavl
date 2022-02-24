@@ -1,5 +1,11 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
 
+/*
+ *	Simple AVL tree - example
+ *
+ *	Copyright 2022 Ian Pilcher <arequipeno@gmail.com>
+ */
+
 #include <assert.h>
 #include <inttypes.h>
 #include <savl.h>
