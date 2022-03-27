@@ -54,7 +54,7 @@ struct savl_node {
  * @see	savl_node
  */
 #define SAVL_NODE_CONTAINER(ptr, type, member)	\
-	((type *)(((const unsigned char *)(ptr)) - offsetof(type, member)))
+	((type *)(void *)(((unsigned char *)(ptr)) - offsetof(type, member)))
 
 /**
  * Type used for passing keys to comparison callback functions.
